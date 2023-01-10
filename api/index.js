@@ -2,6 +2,7 @@ import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 dotenv.config();
+import cors from "cors";
 import hotelRoute from "../api/route/hotelRoute.js";
 import roomRoute from "../api/route/roomRoute.js";
 import authRoute from "../api/route/authRoute.js";
@@ -22,6 +23,7 @@ const mongo = async () => {
 
 //middlewares.
 app.use(express.json());
+app.use(cors());
 app.use("/hotel", hotelRoute);
 app.use("/room", roomRoute);
 app.use("/payment", paymentRoute);
