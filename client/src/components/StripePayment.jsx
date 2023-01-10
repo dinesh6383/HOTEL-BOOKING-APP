@@ -27,6 +27,7 @@ var element = {
 };
 
 const StripePayment = ({ cardName }) => {
+  const baseUrl = "https://mern-hotel-booking-api.onrender.com";
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const { success, failure, dispatch } = useContext(paymentContext);
@@ -64,7 +65,7 @@ const StripePayment = ({ cardName }) => {
     if (!error) {
       try {
         const { id } = paymentMethod;
-        const response = await axios.post("/payment/", {
+        const response = await axios.post(`${baseUrl}/payment/`, {
           amount: total,
           id: id,
           city: place,
