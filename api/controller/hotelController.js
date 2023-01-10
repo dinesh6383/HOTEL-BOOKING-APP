@@ -54,12 +54,11 @@ export const getHotelsRoom = async (req, res, next) => {
     });
     const data = await Promise.all(
       HotelOfCity[0]?.rooms.map((roomId) => {
-        console.log(roomId.splice(0, 10));
         return Room.findById({ _id: roomId });
       })
     );
     console.log("I have been called");
-    res.status(200).json(HotelOfCity);
+    res.status(200).json(data);
   } catch (err) {
     next(err);
   }
