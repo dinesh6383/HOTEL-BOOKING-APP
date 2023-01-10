@@ -92,7 +92,7 @@ const RoomModal = ({ roomData }) => {
         <div>
           <p className="text-sm font-semibold sm:text-xs">SELECT YOUR ROOMS</p>
           <p className="text-sm text-gray-400 mt-1 font-semibold">
-            {roomData[0]?.roomType}
+            {roomData?.roomType}
           </p>
         </div>
         <div className="flex sm:flex-col">
@@ -110,7 +110,7 @@ const RoomModal = ({ roomData }) => {
         </div>
       </div>
       <div className="grid grid-cols-5 justify-around items-center mt-5 sm:grid-cols-3 sm:gap-3">
-        {roomData[0]?.roomNumbers.map((nums, idx) => {
+        {roomData?.roomNumbers.map((nums, idx) => {
           return (
             <div key={idx} className="flex items-center">
               <div
@@ -118,7 +118,7 @@ const RoomModal = ({ roomData }) => {
                   isAvailable(nums)
                     ? null
                     : () => {
-                        handleRoomReducer(nums, roomData[0]?.price);
+                        handleRoomReducer(nums, roomData?.price);
                       }
                 }
                 style={{

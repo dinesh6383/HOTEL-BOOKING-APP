@@ -7,6 +7,7 @@ import { Modal } from "../context/ModalContext";
 import { useGoogleLogin } from "@react-oauth/google";
 
 const RegisterModal = () => {
+  const baseUrl = "https://mern-hotel-booking-api.onrender.com";
   const { setShowModal } = useContext(Modal);
   const { error, dispatch } = useContext(authContext);
   const [userDetails, setUserDetails] = useState({
@@ -34,7 +35,10 @@ const RegisterModal = () => {
       if (userDetails.password !== userDetails.confirmPassword) {
         setPassMissMatch(true);
       } else {
-        const response = await axios.post("/auth/register", userDetails);
+        const response = await axios.post(
+          `${baseUrl}/auth/register`,
+          userDetails
+        );
         dispatch({
           type: "LOGIN_SUCCESS",
           data: response.data,

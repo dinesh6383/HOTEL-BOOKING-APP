@@ -7,14 +7,13 @@ import RoomModal from "./RoomModal";
 const PriceTable = ({ location, selectedRooms, setSelectedRooms }) => {
   const [selectedRange, setSelectedRange] = useState([]);
   const [openModal, setOpenModal] = useState("");
-  console.log(location);
 
   const { data } = UseFetch(`/hotel/find/${location[2]}/${location[3]}`);
-  console.log(data);
+  console.log(data?.data);
 
   const handleData = (room) => {
     setSelectedRange(room);
-    setOpenModal(room[0]?.roomType);
+    setOpenModal(room?.roomType);
   };
 
   return (
@@ -22,7 +21,7 @@ const PriceTable = ({ location, selectedRooms, setSelectedRooms }) => {
       {data?.data && (
         <>
           {data?.data
-            .sort((a, b) => b[0]?.price - a[0]?.price)
+            .sort((a, b) => b?.price - a?.price)
             .map((room, idx) => {
               return (
                 <div
@@ -33,8 +32,7 @@ const PriceTable = ({ location, selectedRooms, setSelectedRooms }) => {
                     style={{
                       transitionDuration: "0.5s",
                       transitionTimingFunction: "ease-in-out",
-                      translate:
-                        openModal === room[0]?.roomType ? "0%" : "-100%",
+                      translate: openModal === room?.roomType ? "0%" : "-100%",
                     }}
                     className="absolute top-0 left-0 bottom-0 bg-blue-200 ease-in rounded-lg right-72 sm:right-0 shadow-sm "
                   >
@@ -45,9 +43,9 @@ const PriceTable = ({ location, selectedRooms, setSelectedRooms }) => {
                     />
                   </div>
                   <div>
-                    <p className="text-xl font-bold">{room[0]?.roomType}</p>
+                    <p className="text-xl font-bold">{room?.roomType}</p>
                     <div className="mt-3">
-                      {room[0]?.roomType !== "Low Ranged Room" && (
+                      {room?.roomType !== "Low Ranged Room" && (
                         <div className="flex items-center">
                           <span className="mr-2 text-sm font-semibold">
                             FULL BED 1 :
@@ -57,13 +55,13 @@ const PriceTable = ({ location, selectedRooms, setSelectedRooms }) => {
                       )}
                       <div className="flex items-center mt-1">
                         <span className="mr-2 text-sm font-semibold">
-                          {room[0]?.roomType === "High Ranged Room" ||
-                          room[0]?.roomType === "Low Ranged Room"
+                          {room?.roomType === "High Ranged Room" ||
+                          room?.roomType === "Low Ranged Room"
                             ? "TWIN BED 2 : "
                             : "TWIN BED 1 : "}
                         </span>
-                        {room[0]?.roomType === "High Ranged Room" ||
-                        room[0]?.roomType === "Low Ranged Room" ? (
+                        {room?.roomType === "High Ranged Room" ||
+                        room?.roomType === "Low Ranged Room" ? (
                           <>
                             <MdOutlineSingleBed />
                             <MdOutlineSingleBed />
@@ -74,7 +72,7 @@ const PriceTable = ({ location, selectedRooms, setSelectedRooms }) => {
                       </div>
                     </div>
                     <div className="flex items-center justify-start flex-wrap mt-3">
-                      {room[0]?.benifits.map((benifit, idx) => {
+                      {room?.benifits.map((benifit, idx) => {
                         return (
                           <div
                             key={idx}
@@ -88,7 +86,7 @@ const PriceTable = ({ location, selectedRooms, setSelectedRooms }) => {
                   </div>
                   <div className="w-max px-4 py-2 bg-gray-200 flex flex-col md:flex-row md:w-[100%] md:mt-2 md:px-2 items-center justify-between border-[2px] rounded-lg border-slate-500 ml-1">
                     <div>
-                      <p className="font-bold">₹ {room[0]?.price}</p>
+                      <p className="font-bold">₹ {room?.price}</p>
                     </div>
                     <div>
                       <button

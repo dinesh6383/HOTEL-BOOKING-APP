@@ -7,6 +7,7 @@ import { Modal } from "../context/ModalContext";
 import { useGoogleLogin } from "@react-oauth/google";
 
 const LoginModal = () => {
+  const baseUrl = "https://mern-hotel-booking-api.onrender.com";
   const { setShowModal } = useContext(Modal);
   const { dispatch, loading, error } = useContext(authContext);
   const [userDetails, setUserDetails] = useState({
@@ -27,7 +28,7 @@ const LoginModal = () => {
       type: "LOGIN_START",
     });
     try {
-      const response = await axios.post("/auth/login", userDetails);
+      const response = await axios.post(`${baseUrl}/auth/login`, userDetails);
       dispatch({
         type: "LOGIN_SUCCESS",
         data: response.data,
