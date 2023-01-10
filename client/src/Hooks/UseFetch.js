@@ -5,12 +5,13 @@ const UseFetch = (url) => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
+  const baseUrl = "https://mern-hotel-booking-api.onrender.com";
 
   useEffect(() => {
     const fetch = async () => {
       setLoading(true);
       try {
-        const result = await axios.get(url);
+        const result = await axios.get(`${baseUrl}${url}`);
         setData(result);
       } catch (err) {
         setError(err);

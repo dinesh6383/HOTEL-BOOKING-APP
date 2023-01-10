@@ -7,9 +7,10 @@ import RoomModal from "./RoomModal";
 const PriceTable = ({ location, selectedRooms, setSelectedRooms }) => {
   const [selectedRange, setSelectedRange] = useState([]);
   const [openModal, setOpenModal] = useState("");
+  console.log(location);
 
   const { data } = UseFetch(`/hotel/find/${location[2]}/${location[3]}`);
-  // console.log(data);
+  console.log(data);
 
   const handleData = (room) => {
     setSelectedRange(room);
@@ -21,7 +22,7 @@ const PriceTable = ({ location, selectedRooms, setSelectedRooms }) => {
       {data?.data && (
         <>
           {data?.data
-            .sort((a, b) => b[0].price - a[0].price)
+            .sort((a, b) => b[0]?.price - a[0]?.price)
             .map((room, idx) => {
               return (
                 <div
@@ -33,7 +34,7 @@ const PriceTable = ({ location, selectedRooms, setSelectedRooms }) => {
                       transitionDuration: "0.5s",
                       transitionTimingFunction: "ease-in-out",
                       translate:
-                        openModal === room[0].roomType ? "0%" : "-100%",
+                        openModal === room[0]?.roomType ? "0%" : "-100%",
                     }}
                     className="absolute top-0 left-0 bottom-0 bg-blue-200 ease-in rounded-lg right-72 sm:right-0 shadow-sm "
                   >

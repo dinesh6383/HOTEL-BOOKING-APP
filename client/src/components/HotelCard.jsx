@@ -4,16 +4,29 @@ import { BsStarFill } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
 import { authContext } from "../context/AuthContext";
 import { Modal } from "../context/ModalContext";
+import { searchContext } from "../context/SearchContext";
 
 const HotelCard = ({ hotel }) => {
+  const { place, checkIn, checkOut, persons } = useContext(searchContext);
   const { setShowModal } = useContext(Modal);
   const { user } = useContext(authContext);
   const navigate = useNavigate();
+  const conditionCheck =
+    place &&
+    checkIn &&
+    checkOut &&
+    persons?.adult &&
+    persons?.children &&
+    persons?.room;
   const handleCheck = () => {
     const city = hotel.country;
     const hotelId = hotel._id;
     if (user) {
-      navigate(`/hotel/${city}/${hotelId}`);
+      if (conditionCheck) {
+        navigate(`/hotel/${city}/${hotelId}`);
+      } else {
+        console.log("Complete all fields!");
+      }
     } else {
       console.log("Login first check room next!");
       setShowModal("login");

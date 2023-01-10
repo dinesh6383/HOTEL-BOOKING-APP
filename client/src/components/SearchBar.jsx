@@ -60,7 +60,7 @@ const SearchBar = () => {
       dispatch({
         type: "ALTER_DETAILS",
         payload: {
-          city: city,
+          city: city || place,
           checkIn: checkInDate ? checkInDate : checkIn,
           checkOut: checkOutDate ? checkOutDate : checkOut,
           peoples: peoples.adult ? peoples : persons,

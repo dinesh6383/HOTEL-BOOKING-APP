@@ -3,7 +3,7 @@ import Hotel from "../model/hotelModel.js";
 import Room from "../model/roomModel.js";
 
 //CREATE HOTEL CONTROOLER
-export const createHotel = async (req, res) => {
+export const createHotel = async (req, res, next) => {
   const newHotel = new Hotel(req.body);
 
   try {
@@ -15,7 +15,7 @@ export const createHotel = async (req, res) => {
 };
 
 //READ ALL HOTEL
-export const getAllHotel = async (req, res) => {
+export const getAllHotel = async (req, res, next) => {
   try {
     const allHotels = await Hotel.find();
     res.status(200).json(allHotels);
@@ -25,7 +25,7 @@ export const getAllHotel = async (req, res) => {
 };
 
 //READ BY CITY
-export const getHotelsByCity = async (req, res) => {
+export const getHotelsByCity = async (req, res, next) => {
   try {
     const searchedHotels = await Hotel.find({ country: req.params.city });
     res.status(200).json(searchedHotels);
@@ -35,7 +35,7 @@ export const getHotelsByCity = async (req, res) => {
 };
 
 //READ ONE HOTEL OF CITY
-export const getHotelByCity = async (req, res) => {
+export const getHotelByCity = async (req, res, next) => {
   try {
     const HotelOfCity = await Hotel.find({
       $and: [{ country: req.params.city }, { _id: req.params.id }],
@@ -47,17 +47,19 @@ export const getHotelByCity = async (req, res) => {
 };
 
 //READ ROOMS OF THE HOTEL
-export const getHotelsRoom = async (req, res) => {
+export const getHotelsRoom = async (req, res, next) => {
   try {
     const HotelOfCity = await Hotel.find({
       $and: [{ country: req.params.city }, { _id: req.params.id }],
     });
     const data = await Promise.all(
       HotelOfCity[0]?.rooms.map((roomId) => {
-        return Room.find({ _id: roomId });
+        console.log(roomId.splice(0, 10));
+        return Room.findById({ _id: roomId });
       })
     );
-    res.status(200).json(data);
+    console.log("I have been called");
+    res.status(200).json(HotelOfCity);
   } catch (err) {
     next(err);
   }
