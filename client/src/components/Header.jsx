@@ -40,8 +40,12 @@ const Header = () => {
       <div className="w-[100%] bg-sky-50 h-[60px] px-3 py-8 flex justify-between items-center border-b-2 border-gray-300">
         <Link to="/">
           <div className="flex justify-center items-center">
-            <img className="w-[60px]" src={logo} alt="logo-img"></img>
-            <p className="text-xl md:text-md font-bold ml-2 text-sky-700">
+            <img
+              className="w-[60px] xsm:w-[50px]"
+              src={logo}
+              alt="logo-img"
+            ></img>
+            <p className="text-xl xsm:text-lg md:text-md font-bold ml-2 xsm:ml-1 text-sky-700">
               Booking.com
             </p>
           </div>
@@ -62,7 +66,7 @@ const Header = () => {
           <div className="mr-5 sm:mr-2">
             <button
               onClick={() => handleModal("register")}
-              className="bg-sky-600 text-white font-semibold p-2 mr-4 rounded-sm shadow-xl sm:text-sm sm:rounded-lg"
+              className="bg-sky-600 text-white font-semibold p-2 mr-4 xsm:mr-2 rounded-sm shadow-xl sm:text-sm sm:rounded-lg"
             >
               REGISTER
             </button>

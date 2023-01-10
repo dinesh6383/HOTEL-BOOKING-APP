@@ -42,7 +42,7 @@ const StripePayment = ({ cardName }) => {
   useEffect(() => {
     const confirmBooking = async () => {
       await Promise.all(
-        ids.forEach((roomnumid) => {
+        ids?.forEach((roomnumid) => {
           axios.put(`/room/availability/${roomnumid}`, {
             dates: dateRange,
           });
