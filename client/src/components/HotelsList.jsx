@@ -3,6 +3,7 @@ import UseFetch from "../Hooks/UseFetch";
 import { searchContext } from "../context/SearchContext";
 import SearchBar from "./SearchBar";
 import HotelCard from "./HotelCard";
+import loadingIcon from "../Images/loading-bar.gif";
 
 const HotelsList = () => {
   const { place } = useContext(searchContext);
@@ -25,11 +26,16 @@ const HotelsList = () => {
           Top Hotels in {place}
         </p>
       </div>
-      {!loading && (
+      {!loading ? (
         <div className="w-[100%] h-max flex justify-center items-center py-5 px-3 sm:px-2 flex-wrap">
           {data?.data?.map((hotel, idx) => {
             return <HotelCard hotel={hotel} key={idx} />;
           })}
+        </div>
+      ) : (
+        <div className="w-[100%] h-[400px] flex flex-col justify-center items-center">
+          <img src={loadingIcon} className="w-[80px]"></img>
+          <p className="text-lg font-bold">Loading..</p>
         </div>
       )}
     </>
